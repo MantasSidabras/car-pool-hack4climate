@@ -28,7 +28,7 @@ namespace CarPool.Trip.Application.TripJoinRequest.Queries
             public async Task<EventTripDetails> Handle(GetTripDetails request, CancellationToken cancellationToken)
             {
                 var trip = _dbContext.EventTrips
-                    .Where(e => e.EventId == request.Id)
+                    .Where(e => e.Id == request.Id)
                     .Include(e => e.Driver)
                     .Include(e => e.TripJoinRequests)
                     .Include(e => e.Event)
