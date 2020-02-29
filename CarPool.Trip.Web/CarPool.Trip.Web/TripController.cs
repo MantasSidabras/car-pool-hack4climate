@@ -20,12 +20,6 @@ namespace CarPool.Trip.Web
             _mediator = mediator;
         }
 
-        [HttpGet("health")]
-        public IActionResult Health()
-        {
-            return Ok("Healthy");
-        }
-
         [HttpGet("events")]
         [ProducesResponseType(typeof(IEnumerable<EventDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Events()
