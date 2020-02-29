@@ -44,7 +44,7 @@ namespace CarPool.Trip.Web
 
         [HttpPost("participant")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Register([FromRoute] RegisterParticipant request)
+        public async Task<IActionResult> Register(RegisterParticipant request)
             => Ok(await _mediator.Send(request));
 
         [HttpPost("trip/init")]
