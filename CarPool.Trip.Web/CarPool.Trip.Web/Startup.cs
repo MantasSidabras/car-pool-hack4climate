@@ -38,6 +38,11 @@ namespace CarPool.Trip.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             using (var context = scope.ServiceProvider.GetService<TripDbContext>())
             {
@@ -79,11 +84,6 @@ namespace CarPool.Trip.Web
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
             });
-
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
         }
     }
 }
