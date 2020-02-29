@@ -1,30 +1,28 @@
-import * as React from 'react';
+import * as React from "react";
 
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
-import Login from '../Login/Login';
-import MainSection from '../MainSection/MainSection';
-import PATHS from './RouterPaths';
+import { Switch, Route, Redirect } from "react-router-dom";
+import Login from "../Login/Login";
+import MainSection from "../MainSection/MainSection";
+import PATHS from "./RouterPaths";
+import EventDetails from "../MainSection/Event/EventDetails/EventDetails";
 
 const MainRouter = () => {
-    return (
-
-        <Switch>
-            {/* <Route path="/main">
-                <About />
-            </Route> */}
-            <Route path={PATHS.login}>
-                <Login />
-            </Route>
-            <Route path={PATHS.home}>
-                <MainSection />
-            </Route>
-        </Switch>
-    )
-}
+  return (
+    <Switch>
+      <Route path={PATHS.login}>
+        <Login />
+      </Route>
+      <Route path={PATHS.event}>
+        <EventDetails />
+      </Route>
+      <Route path={PATHS.home}>
+        <MainSection />
+      </Route>
+      <Route path={"/*"}>
+        <Redirect to={PATHS.home} />
+      </Route>
+    </Switch>
+  );
+};
 
 export default MainRouter;

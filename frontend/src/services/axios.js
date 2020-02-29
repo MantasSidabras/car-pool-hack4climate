@@ -20,3 +20,13 @@ export const getEvents = async () => {
     return { error };
   }
 };
+
+export const getEventById = async id => {
+  try {
+    const { data } = await backendHttpClient.get(`/event/trips/${id}`);
+    return { data };
+  } catch (error) {
+    console.error(error);
+    return { error };
+  }
+};

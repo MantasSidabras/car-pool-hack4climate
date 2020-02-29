@@ -21,24 +21,27 @@ const useStyles = makeStyles({
   }
 });
 
-const EventCard = ({ eventInfo }) => {
+const EventCard = ({ eventInfo, onEventSelect }) => {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick={onEventSelect}>
       <CardActionArea className={classes.container}>
         <CardMedia
           component="img"
-          alt={eventInfo.name}
-          image={require("./h4c.jpg")}
-          title={eventInfo.name}
+          alt={eventInfo.eventName}
+          image={eventInfo.logoUri}
+          title={eventInfo.eventName}
           className={classes.image}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {eventInfo.name}
+            {eventInfo.eventName}
+          </Typography>
+          <Typography variant="body2" component="p">
+            {new Date(eventInfo.eventTime).toDateString()}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {eventInfo.summary}
+            {eventInfo.address}
           </Typography>
         </CardContent>
       </CardActionArea>
