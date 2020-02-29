@@ -12,6 +12,8 @@ namespace CarPool.Trip.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Participant> builder)
         {
             builder.HasKey(p => p.Id);
+            builder.HasIndex(p => p.PhoneNumber)
+                .IsUnique();
         }
     }
 }
