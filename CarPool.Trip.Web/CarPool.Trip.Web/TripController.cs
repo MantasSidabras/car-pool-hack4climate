@@ -36,7 +36,7 @@ namespace CarPool.Trip.Web
         [HttpPost("trip/join/{tripId}")]
         public TripJoinRequest JoinTrip(
             [FromRoute] int tripId,
-            [FromBody] Point passengerLocation)
+            [FromBody] string passengerAddress)
         {
             throw new NotImplementedException();
         }
@@ -52,13 +52,7 @@ namespace CarPool.Trip.Web
 
     public class StartDetails
     {
-        public Point Location { get; set; }
+        public string Address { get; set; }
         public DateTime Time { get; set; }
-    }
-
-    public class Point
-    {
-        decimal Latitude { get; set; }
-        decimal Longtitude { get; set; }
     }
 }
