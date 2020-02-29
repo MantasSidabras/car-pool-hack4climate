@@ -1,16 +1,15 @@
-import { Box, Grid, List, ListItem, makeStyles } from "@material-ui/core";
+import { Box, Grid, makeStyles } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import MainContext from "../../Context/MainContext";
-import eventsMock from "../../MockData/Events";
-import EventCard from "./Event/EventCard/EventCard";
-import EventList from "./Event/EventList/EventList";
-import PATHS from "../Router/RouterPaths";
 import { getEvents } from "../../services/axios";
+import PATHS from "../Router/RouterPaths";
+import EventList from "./Event/EventList/EventList";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "60%",
+    width: "100%",
+    maxWidth: "700px",
     // height: "500px",
     backgroundColor: "white"
   }

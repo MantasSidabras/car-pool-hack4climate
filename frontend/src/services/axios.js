@@ -23,7 +23,7 @@ export const getEvents = async () => {
 
 export const getEventById = async id => {
   try {
-    const { data } = await backendHttpClient.get(`/event/trips/${id}`);
+    const { data } = await backendHttpClient.get(`/event/${id}`);
     return { data };
   } catch (error) {
     console.error(error);

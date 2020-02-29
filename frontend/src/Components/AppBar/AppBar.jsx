@@ -7,16 +7,20 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import MainContext from "../../Context/MainContext";
 import PATHS from "../Router/RouterPaths";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    height: 50
+    // flexGrow: 1
+    // height: 50
   },
   menuButton: {
     marginRight: theme.spacing(2)
   },
   title: {
+    // flexGrow: 1
+  },
+  spacer: {
     flexGrow: 1
   }
 }));
@@ -31,21 +35,15 @@ const AppBarComponent = () => {
 
   const onTitleClick = () => {
     history.push(PATHS.home);
-  };    
+  };
 
   return (
     <AppBar position="sticky" className={classes.root}>
-      <Toolbar>
-        {/* <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton> */}
-        <Typography
-          className={classes.title}
-          variant="h6"
-          onClick={onTitleClick}
-        >
-          Cool car pool
-        </Typography>
+      <Toolbar variant="dense">
+        <Button className={classes.title} onClick={onTitleClick} size="large">
+          Home
+        </Button>
+        <div className={classes.spacer} />
         {!context.loggedIn ? (
           <Button color="inherit" onClick={onLoginClick}>
             Login
