@@ -9,11 +9,10 @@ namespace CarPool.Trip.Domain.Entities
         public int EventId { get; set; }
         public int DriverId { get; set; }
         public DateTime TripStartTime { get; set; }
-        public decimal TripStartLatitude { get; set; }
-        public decimal TripStartLongitude { get; set; }
+        public string Address { get; set; }
+        public int Capacity { get; set; }
         public Event Event { get; set; }
         public Participant Driver { get; set; }
-
         public ICollection<TripJoinRequest> TripJoinRequests { get; set; }
     }
 }

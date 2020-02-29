@@ -25,10 +25,16 @@ namespace CarPool.Trip.Web
             throw new NotImplementedException();
         }
 
+        [HttpGet("trip-requests/{tripId}")]
+        public TripJoinRequest GetTripRequests([FromRoute] int tripId)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpPost("trip/init/{eventId}")]
         public int InitiateTrip(
             [FromRoute] int eventId, 
-            [FromBody] StartDetails startDetails)
+            [FromBody] InitTrip req)
         {
             throw new NotImplementedException();
         }
@@ -36,7 +42,7 @@ namespace CarPool.Trip.Web
         [HttpPost("trip/join/{tripId}")]
         public TripJoinRequest JoinTrip(
             [FromRoute] int tripId,
-            [FromBody] string passengerAddress)
+            [FromBody] JoinTrip req)
         {
             throw new NotImplementedException();
         }
@@ -50,9 +56,19 @@ namespace CarPool.Trip.Web
         }
     }
 
-    public class StartDetails
+    public class InitTrip
     {
         public string Address { get; set; }
         public DateTime Time { get; set; }
+        public string CarPlate { get; set; }
+        public string CarDescription { get; set; }
+        public string DriverPhoneNumber { get; set; }
+        public int Capacity { get; set; }
+    }
+
+    public class JoinTrip
+    {
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

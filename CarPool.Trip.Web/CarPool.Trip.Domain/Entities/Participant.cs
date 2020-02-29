@@ -8,7 +8,7 @@ namespace CarPool.Trip.Domain.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Carplate { get; set; }
-
+        public string CarModel { get; set; }
         public ICollection<EventTrip> DrivingAt { get; set; }
         public ICollection<TripJoinRequest> TripJoinRequests { get; set; }
     }
