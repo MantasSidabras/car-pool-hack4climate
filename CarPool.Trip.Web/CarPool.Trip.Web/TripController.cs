@@ -1,5 +1,6 @@
 ﻿using CarPool.Trip.Application.Dto;
 using CarPool.Trip.Application.Event.Queries;
+using CarPool.Trip.Application.EventTrip.Commands;
 using CarPool.Trip.Application.TripJoinRequest.Commands;
 using CarPool.Trip.Domain.Entities;
 using MediatR;
@@ -38,13 +39,10 @@ namespace CarPool.Trip.Web
             throw new NotImplementedException();
         }
 
-        [HttpPost("trip/init/{eventId}")]
-        public int InitiateTrip(
-            [FromRoute] int eventId, 
-            [FromBody] InitTrip req)
-        {
-            throw new NotImplementedException();
-        }
+        [HttpPost("trip/init")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> InitiateTrip(InitiateEventTrip request) =>
+            Ok(await _mediator.Send(request));
 
         [HttpPost("trip/join")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
