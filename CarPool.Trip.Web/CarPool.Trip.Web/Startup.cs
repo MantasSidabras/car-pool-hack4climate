@@ -82,10 +82,10 @@ namespace CarPool.Trip.Web
                 endpoints.MapHealthChecks("/health");
             });
 
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            //app.UseCors(x => x
+            //    .AllowAnyOrigin()
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader());
         }
     }
 }
