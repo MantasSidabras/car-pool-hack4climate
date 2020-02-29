@@ -1,19 +1,17 @@
 import * as React from "react";
-
-import { Switch, Route, Redirect } from "react-router-dom";
-import Auth from "../Auth/AuthContainer";
-import MainSection from "../MainSection/MainSection";
-import PATHS from "./RouterPaths";
-import EventDetails from "../MainSection/Event/EventDetails/EventDetails";
-import Logout from "../Auth/Logout";
+import { Redirect, Route, Switch } from "react-router-dom";
 import MainContext from "../../Context/MainContext";
 import Login from "../Auth/Login";
+import Logout from "../Auth/Logout";
 import SignUp from "../Auth/SignUp";
+import EventDetails from "../MainSection/Event/EventDetails/EventDetails";
+import MainSection from "../MainSection/MainSection";
+import PATHS from "./RouterPaths";
 
 const MainRouter = () => {
   const [context, setContext] = React.useContext(MainContext);
   const loggedIn = !!context.token;
-
+  console.log(context.token);
   return (
     <Switch>
       <Route path={PATHS.login}>
@@ -26,13 +24,17 @@ const MainRouter = () => {
         {loggedIn ? <EventDetails /> : <Redirect to={PATHS.home} />}
       </Route>
       <Route path={PATHS.home}>
-        {loggedIn ? <MainSection /> : <Redirect to={PATHS.home} />}
+        {loggedIn ? <MainSection /> : <Redirect to={PATHS.login} />}
       </Route>
       <Route path={PATHS.logout}>
-        <Logout />
+        {loggedIn ? <Logout /> : <Redirect to={PATHS.login} />}
       </Route>
       <Route path={"/*"}>
-        {loggedIn ? <Redirect to={PATHS.home} /> : <Redirect to={PATHS.auth} />}
+        {loggedIn ? (
+          <Redirect to={PATHS.home} />
+        ) : (
+          <Redirect to={PATHS.login} />
+        )}
       </Route>
     </Switch>
   );

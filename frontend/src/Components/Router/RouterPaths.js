@@ -3,6 +3,6 @@ const PATHS = {
   login: "/login",
   signup: "/signup",
   event: "/events/:id",
-  logout: "logout"
+  logout: "/logout"
 };
 export default PATHS;
