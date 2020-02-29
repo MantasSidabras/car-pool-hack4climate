@@ -7,8 +7,8 @@ namespace CarPool.Trip.Persistence
 {
     public class TripDbContext : DbContext
     {
-        protected TripDbContext(DbContextOptions<TripDbContext> options)
-            : base(options)
+        public TripDbContext()
+            : base()
         { }
 
         public DbSet<Event> Events { get; set; }
