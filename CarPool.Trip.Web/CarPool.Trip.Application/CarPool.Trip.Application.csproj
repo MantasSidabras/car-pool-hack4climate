@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="EventTrip\Commands\" />
+    <Folder Include="EventTrip\Queries\" />
+    <Folder Include="Event\Commands\" />
+    <Folder Include="Participant\Commands\" />
+    <Folder Include="Participant\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CarPool.Trip.Persistence\CarPool.Trip.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

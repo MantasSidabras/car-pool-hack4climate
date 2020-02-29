@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarPool.Trip.Domain", "CarP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarPool.Trip.Persistence", "CarPool.Trip.Persistence\CarPool.Trip.Persistence.csproj", "{BED1D80E-13A4-4BC6-897E-7C557CF5FB97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarPool.Trip.Application", "CarPool.Trip.Application\CarPool.Trip.Application.csproj", "{5B231291-85FC-4586-A51F-51ABBC212552}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BED1D80E-13A4-4BC6-897E-7C557CF5FB97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BED1D80E-13A4-4BC6-897E-7C557CF5FB97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BED1D80E-13A4-4BC6-897E-7C557CF5FB97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B231291-85FC-4586-A51F-51ABBC212552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B231291-85FC-4586-A51F-51ABBC212552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B231291-85FC-4586-A51F-51ABBC212552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B231291-85FC-4586-A51F-51ABBC212552}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

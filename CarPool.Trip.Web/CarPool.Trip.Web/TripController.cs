@@ -1,12 +1,25 @@
-﻿using CarPool.Trip.Domain.Entities;
+﻿using CarPool.Trip.Application.Dto;
+using CarPool.Trip.Application.Event.Queries;
+using CarPool.Trip.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace CarPool.Trip.Web
 {
     [ApiController]
     public class TripController : ControllerBase
     {
+        private readonly IMediator _mediator;
+
+        public TripController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [HttpGet("health")]
         public IActionResult Health()
         {
@@ -14,10 +27,9 @@ namespace CarPool.Trip.Web
         }
 
         [HttpGet("events")]
-        public Event[] Events()
-        {
-            throw new NotImplementedException();
-        }
+        [ProducesResponseType(typeof(IEnumerable<EventDto>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Events()
+            => Ok(await _mediator.Send(new GetAllEvents()));
 
         [HttpGet("event/trips/{eventId}")]
         public EventTrip[] EventTrips([FromRoute] int eventId)

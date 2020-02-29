@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CarPool.Trip.Application\CarPool.Trip.Application.csproj" />
     <ProjectReference Include="..\CarPool.Trip.Domain\CarPool.Trip.Domain.csproj" />
     <ProjectReference Include="..\CarPool.Trip.Persistence\CarPool.Trip.Persistence.csproj" />
   </ItemGroup>
