@@ -34,6 +34,7 @@ namespace CarPool.Trip.Application.Participant.Commands
                     CarModel = request.CarModel,
                     Carplate = request.Carplate,
                     Name = request.Name,
+                    Password = request.Password,
                     Surname = request.Surname,
                     PhoneNumber = request.PhoneNumber
                 };
