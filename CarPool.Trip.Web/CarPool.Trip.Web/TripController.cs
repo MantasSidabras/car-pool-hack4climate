@@ -42,7 +42,7 @@ namespace CarPool.Trip.Web
         public async Task<IActionResult> GetTripRequests([FromRoute] int tripId)
             => Ok(await _mediator.Send(new GetTripJoinRequestsByTrip { Id = tripId }));
 
-        [HttpPost("participant")]
+        [HttpPost("participant/register")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Register(RegisterParticipant request)
             => Ok(await _mediator.Send(request));
