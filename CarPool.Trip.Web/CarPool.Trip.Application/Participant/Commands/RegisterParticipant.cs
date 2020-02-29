@@ -1,28 +1,33 @@
 ﻿using CarPool.Trip.Persistence;
 using MediatR;
+using System;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CarPool.Trip.Application.Participant.Commands
 {
-    public class RegisterParticipant : IRequest<int>
+    public class RegisterParticipant : IRequest<string>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
+        public string Password { get; set; }
         public string Carplate { get; set; }
         public string CarModel { get; set; }
 
-        public class Handler : IRequestHandler<RegisterParticipant, int>
+        public class Handler : IRequestHandler<RegisterParticipant, string>
         {
             private readonly TripDbContext _dbContext;
+            private const string ApplicationSecret = "We Are COOL";
 
             public Handler(TripDbContext dbContext)
             {
                 _dbContext = dbContext;
             }
 
-            public async Task<int> Handle(RegisterParticipant request, CancellationToken cancellationToken)
+            public async Task<string> Handle(RegisterParticipant request, CancellationToken cancellationToken)
             {
                 var participant = new Domain.Entities.Participant
                 {
@@ -37,7 +42,11 @@ namespace CarPool.Trip.Application.Participant.Commands
 
                 await _dbContext.SaveChangesAsync();
 
-                return participant.Id;
+                return Convert.ToBase64String(
+                    ProtectedData.Protect(
+                        Encoding.Unicode.GetBytes(participant.PhoneNumber),
+                        Encoding.Unicode.GetBytes(ApplicationSecret),
+                        DataProtectionScope.LocalMachine));
             }
         }
     }

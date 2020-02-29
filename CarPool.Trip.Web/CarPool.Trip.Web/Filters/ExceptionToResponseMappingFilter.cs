@@ -14,6 +14,7 @@ namespace CarPool.Trip.Web.Filters
             context.HttpContext.Response.StatusCode = context.Exception switch
             {
                 NotFoundException _ => (int)HttpStatusCode.NotFound,
+                UnauthorizedException _ => (int)HttpStatusCode.Unauthorized,
                 _ => (int)HttpStatusCode.InternalServerError
             };
         }

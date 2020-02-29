@@ -30,3 +30,40 @@ export const getEventById = async id => {
     return { error };
   }
 };
+
+export const register = async (
+  name,
+  surname,
+  phoneNumber,
+  password,
+  carplate,
+  carModel
+) => {
+  try {
+    const { data } = await backendHttpClient.post(`/register`, {
+      name,
+      surname,
+      phoneNumber,
+      password,
+      carplate,
+      carModel
+    });
+    return { data };
+  } catch (error) {
+    console.error(error);
+    return { error };
+  }
+};
+
+export const login = async (phoneNumber, password) => {
+  try {
+    const { data } = await backendHttpClient.post(`/register`, {
+      phoneNumber,
+      password
+    });
+    return { data };
+  } catch (error) {
+    console.error(error);
+    return { error };
+  }
+};

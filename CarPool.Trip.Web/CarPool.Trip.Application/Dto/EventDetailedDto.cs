@@ -14,6 +14,7 @@ namespace CarPool.Trip.Application.Dto
 
         public class EventTripDto
         {
+            public int Id { get; set; }
             public string Address { get; set; }
             public int Capacity { get; set; }
             public int CurrentPassengerCount { get; set; }

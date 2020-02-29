@@ -1,5 +1,11 @@
 import { createMuiTheme, ThemeProvider, Grid } from "@material-ui/core";
-import { lightBlue } from "@material-ui/core/colors";
+import {
+  lightBlue,
+  purple,
+  deepPurple,
+  green,
+  yellow
+} from "@material-ui/core/colors";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
@@ -10,7 +16,8 @@ import { MainContextProvider } from "./Context/MainContext";
 
 const theme = createMuiTheme({
   palette: {
-    primary: lightBlue
+    primary: lightBlue,
+    secondary: yellow
   }
 });
 

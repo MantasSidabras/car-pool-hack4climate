@@ -29,6 +29,8 @@ const AppBarComponent = () => {
   const classes = useStyles();
   const history = useHistory();
   const [context, setContext] = useContext(MainContext);
+
+  const isLoggedIn = !!context.token;
   const onLoginClick = () => {
     history.push(PATHS.login);
   };
@@ -44,12 +46,19 @@ const AppBarComponent = () => {
           Home
         </Button>
         <div className={classes.spacer} />
-        {!context.loggedIn ? (
-          <Button color="inherit" onClick={onLoginClick}>
-            Login
-          </Button>
+        {!isLoggedIn ? (
+          <>
+            <Button color="inherit" onClick={onLoginClick}>
+              Log In
+            </Button>
+            <Button color="inherit" onClick={() => history.push(PATHS.signup)}>
+              Sign Up
+            </Button>
+          </>
         ) : (
-          <div />
+          <Button color="inherit" onClick={() => history.push(PATHS.logout)}>
+            Log Out
+          </Button>
         )}
       </Toolbar>
     </AppBar>

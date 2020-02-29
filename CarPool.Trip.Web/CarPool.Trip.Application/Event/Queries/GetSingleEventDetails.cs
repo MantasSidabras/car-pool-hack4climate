@@ -51,6 +51,7 @@ namespace CarPool.Trip.Application.Event.Queries
                     EventTrips = eventTrips.Select(x =>
                         new EventDetailedDto.EventTripDto 
                         {
+                            Id = x.Id,
                             Address = x.Address,
                             Capacity = x.Capacity,
                             CarModel = x.Driver.CarModel,
