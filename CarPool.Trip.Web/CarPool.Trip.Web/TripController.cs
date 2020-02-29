@@ -32,7 +32,11 @@ namespace CarPool.Trip.Web
         [HttpGet("events")]
         [ProducesResponseType(typeof(IEnumerable<EventDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Events()
-            => Ok(await _mediator.Send(new GetAllEvents()));
+        {
+            var userId = GetUserId();
+            return Ok(await _mediator.Send(new GetAllEvents()));
+        }
+            
 
         [HttpGet("event/{eventId}")]
         [ProducesResponseType(typeof(EventDetailedDto), (int)HttpStatusCode.OK)]
@@ -57,7 +61,11 @@ namespace CarPool.Trip.Web
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public async Task<IActionResult> Login(LoginParticipant request)
-            => Ok(await _mediator.Send(request));
+        {
+
+            return Ok(await _mediator.Send(request));
+        }
+            
 
         [HttpGet("trip/{id}")]
         [ProducesResponseType(typeof(EventTripDetails), (int)HttpStatusCode.OK)]
@@ -89,11 +97,11 @@ namespace CarPool.Trip.Web
                 }));
         }
 
-        public int GetUserId()
+        private int GetUserId()
         {
             try
             {
-                var authHeader = HttpContext.Request.Headers["Authorization"][1];
+                var authHeader = HttpContext.Request.Headers["Authorization"][0].Split(' ')[1];
 
                 if (string.IsNullOrEmpty(authHeader))
                     throw new UnauthorizedException();
