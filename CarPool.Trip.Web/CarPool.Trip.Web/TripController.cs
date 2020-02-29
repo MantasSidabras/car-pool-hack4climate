@@ -2,6 +2,7 @@
 using CarPool.Trip.Application.Event.Queries;
 using CarPool.Trip.Application.EventTrip.Commands;
 using CarPool.Trip.Application.TripJoinRequest.Commands;
+using CarPool.Trip.Application.TripJoinRequest.Queries;
 using CarPool.Trip.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -34,10 +35,10 @@ namespace CarPool.Trip.Web
             => Ok(await _mediator.Send(new GetSingleEventDetails(eventId)));
 
         [HttpGet("trip-requests/{tripId}")]
-        public TripJoinRequest GetTripRequests([FromRoute] int tripId)
-        {
-            throw new NotImplementedException();
-        }
+        [ProducesResponseType(typeof(TripJoinRequestDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetTripRequests([FromRoute] int tripId)
+            => Ok(await _mediator.Send(new GetTripJoinRequestsByTrip { Id = tripId }));
 
         [HttpPost("trip/init")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
@@ -51,8 +52,7 @@ namespace CarPool.Trip.Web
 
         [HttpPost("trip-request/approve/{tripJoinRequestId}")]
         public async Task<IActionResult> ApproveTripRequest(
-            [FromRoute] int tripJoinRequestId,
-            [FromBody] bool approve)
+            [FromRoute] int tripJoinRequestId, [FromBody] bool approve)
             => Ok(await _mediator.Send(new ApproveTripJoinRequest
             {
                 TripJoinRequestId = tripJoinRequestId,
