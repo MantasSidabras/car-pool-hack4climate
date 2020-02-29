@@ -33,7 +33,6 @@ namespace CarPool.Trip.Web
         [ProducesResponseType(typeof(IEnumerable<EventDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Events()
         {
-            var userId = GetUserId();
             return Ok(await _mediator.Send(new GetAllEvents()));
         }
             
