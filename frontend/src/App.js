@@ -1,4 +1,4 @@
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider, Grid } from "@material-ui/core";
 import { lightBlue } from "@material-ui/core/colors";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -19,30 +19,20 @@ const context = {
 };
 
 const App = () => {
-  // const [data, setData] = useState([]);
-  // const [error, setError] = useState();
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { data, error } = await getEvents();
-  //     if (data) {
-  //       setData(data);
-  //     }
-  //     if (error) {
-  //       setError(error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <div className="App">
           <MainContextProvider value={context}>
             <AppBarComponent />
-            <MainRouter />
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <MainRouter />
+            </Grid>
           </MainContextProvider>
         </div>
       </ThemeProvider>
