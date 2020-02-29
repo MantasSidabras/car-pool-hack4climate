@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CarPool.Trip.Application.Participant.Queries
 {
-    public class GetParticipants : IRequest<IEnumerable<ParticipantDetailedDto>>
+    public class GetParticipants : IRequest<IEnumerable<ParticipantDto>>
     {
-        public class Handler : IRequestHandler<GetParticipants, IEnumerable<ParticipantDetailedDto>>
+        public class Handler : IRequestHandler<GetParticipants, IEnumerable<ParticipantDto>>
         {
             private readonly TripDbContext _dbContext;
 
@@ -19,16 +19,15 @@ namespace CarPool.Trip.Application.Participant.Queries
                 _dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<ParticipantDetailedDto>> Handle(GetParticipants request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<ParticipantDto>> Handle(GetParticipants request, CancellationToken cancellationToken)
             {
                 return _dbContext.Participants
-                    .Select(x => new ParticipantDetailedDto
+                    .Select(x => new ParticipantDto
                     {
                         CarModel = x.CarModel,
                         Carplate = x.Carplate,
                         Id = x.Id,
                         Name = x.Name,
-                        Password = x.Password,
                         PhoneNumber = x.PhoneNumber,
                         Surname = x.Surname
                     });

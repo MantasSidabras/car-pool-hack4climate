@@ -60,7 +60,7 @@ namespace CarPool.Trip.Web
         }
 
         [HttpGet("participant")]
-        [ProducesResponseType(typeof(IEnumerable<ParticipantDetailedDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<ParticipantDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetParticipants()
             => Ok(await _mediator.Send(new GetParticipants()));
 
