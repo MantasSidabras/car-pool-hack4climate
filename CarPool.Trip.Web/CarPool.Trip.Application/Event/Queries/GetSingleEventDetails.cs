@@ -36,6 +36,11 @@ namespace CarPool.Trip.Application.Event.Queries
                 if (e == null)
                     throw new NotFoundException(nameof(Event), request.Id);
 
+                var eventTrips = _dbContext.EventTrips
+                    .Where(et => et.EventId == request.Id)
+                    .Include(et => et.Driver)
+                    .Include(et => et.TripJoinRequests);
+
                 return new EventDetailedDto
                 {
                     Id = e.Id,
@@ -43,7 +48,7 @@ namespace CarPool.Trip.Application.Event.Queries
                     Description = e.Description,
                     EventName = e.EventName,
                     LogoUri = e.LogoUri,
-                    EventTrips = e.EventTrips.Select(x =>
+                    EventTrips = eventTrips.Select(x =>
                         new EventDetailedDto.EventTripDto 
                         {
                             Address = x.Address,
