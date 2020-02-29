@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CarPool.Trip.Application.Dto
 {
@@ -20,6 +21,7 @@ namespace CarPool.Trip.Application.Dto
             public int CurrentPassengerCount { get; set; }
             public string CarModel { get; set; }
             public string DriverName { get; set; }
+            public DateTime DepartureTime { get; set; }
         }
     }
 }

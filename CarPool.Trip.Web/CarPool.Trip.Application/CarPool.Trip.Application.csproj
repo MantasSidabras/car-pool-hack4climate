@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="EventTrip\Queries\" />
     <Folder Include="Participant\Queries\" />
   </ItemGroup>
 
