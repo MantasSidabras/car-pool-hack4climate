@@ -56,6 +56,7 @@ namespace CarPool.Trip.Application.Event.Queries
                             Capacity = x.Capacity,
                             CarModel = x.Driver.CarModel,
                             DriverName = $"{x.Driver.Name} {x.Driver.Surname}",
+                            DepartureTime = x.TripStartTime,
                             CurrentPassengerCount = x.TripJoinRequests
                                 .Where(t => t.Approved.HasValue && t.Approved.Value)
                                 .Count()

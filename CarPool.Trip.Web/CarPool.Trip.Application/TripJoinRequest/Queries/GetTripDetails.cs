@@ -25,7 +25,7 @@ namespace CarPool.Trip.Application.TripJoinRequest.Queries
                 _dbContext = dbContext;
             }
 
-            public Task<EventTripDetails> Handle(GetTripDetails request, CancellationToken cancellationToken)
+            public async Task<EventTripDetails> Handle(GetTripDetails request, CancellationToken cancellationToken)
             {
                 var trip = _dbContext.EventTrips
                     .Where(e => e.EventId == request.Id)
@@ -48,9 +48,33 @@ namespace CarPool.Trip.Application.TripJoinRequest.Queries
                     PhoneNumber = trip.Driver.PhoneNumber
                 };
 
+                var tripJoinRequestIds = trip.TripJoinRequests.Select(x => x.Id);
 
+                var tripJoinRequests = _dbContext.TripJoinRequests
+                    .Include(x => x.Passenger)
+                    .Where(x => tripJoinRequestIds.Contains(x.Id))
+                    .Select(x => new TripJoinRequestDto
+                    { 
+                        Address = x.Address,
+                        Approved = x.Approved,
+                        Id = x.Id,
+                        Passenger = new PassengerDto
+                        {
+                            Name = x.Passenger.Name,
+                            PhoneNumber = x.Passenger.PhoneNumber,
+                            Surname = x.Passenger.Surname
+                        }
+                    });
 
-                throw new NotImplementedException();
+                return new EventTripDetails
+                {
+                    DepartureAddress = trip.Address,
+                    EventAddress = trip.Event.Address,
+                    DepartureTime = trip.TripStartTime,
+                    Driver = driver,
+                    EventName = trip.Event.EventName,
+                    TripJoinRequests = tripJoinRequests
+                };
             }
         }
     }
