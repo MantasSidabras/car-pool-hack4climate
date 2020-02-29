@@ -25,12 +25,10 @@ namespace CarPool.Trip.Web
             throw new NotImplementedException();
         }
 
-        [HttpPost("trip/init")]
-        public EventTrip InitiateTrip(
-            [FromBody] int eventId, 
-            [FromBody] decimal startLatitude, 
-            [FromBody] decimal startLongtitude,
-            [FromBody] DateTime tripStartTime)
+        [HttpPost("trip/init/{eventId}")]
+        public int InitiateTrip(
+            [FromRoute] int eventId, 
+            [FromBody] StartDetails startDetails)
         {
             throw new NotImplementedException();
         }
@@ -38,8 +36,7 @@ namespace CarPool.Trip.Web
         [HttpPost("trip/join/{tripId}")]
         public TripJoinRequest JoinTrip(
             [FromRoute] int tripId,
-            [FromBody] decimal passengerLatitude,
-            [FromBody] decimal passengerLongtitude)
+            [FromBody] Point passengerLocation)
         {
             throw new NotImplementedException();
         }
@@ -51,5 +48,17 @@ namespace CarPool.Trip.Web
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class StartDetails
+    {
+        public Point Location { get; set; }
+        public DateTime Time { get; set; }
+    }
+
+    public class Point
+    {
+        decimal Latitude { get; set; }
+        decimal Longtitude { get; set; }
     }
 }
