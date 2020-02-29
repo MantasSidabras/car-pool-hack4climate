@@ -1,6 +1,8 @@
 ﻿using CarPool.Trip.Application.Dto;
+using CarPool.Trip.Application.Encryption;
 using CarPool.Trip.Application.Event.Queries;
 using CarPool.Trip.Application.EventTrip.Commands;
+using CarPool.Trip.Application.Exceptions;
 using CarPool.Trip.Application.Participant.Commands;
 using CarPool.Trip.Application.TripJoinRequest.Commands;
 using CarPool.Trip.Application.TripJoinRequest.Queries;
@@ -19,10 +21,12 @@ namespace CarPool.Trip.Web
     public class TripController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IEncryptor _encryptor;
 
-        public TripController(IMediator mediator)
+        public TripController(IMediator mediator, IEncryptor encryptor)
         {
             _mediator = mediator;
+            _encryptor = encryptor;
         }
 
         [HttpGet("events")]
@@ -68,15 +72,38 @@ namespace CarPool.Trip.Web
         [HttpPost("trip/join")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<IActionResult> JoinTrip(RequestToJoinTrip request)
-            => Ok(await _mediator.Send(request));
+        {
+            var userId = GetUserId();
+            return Ok(await _mediator.Send(request));
+        }
 
         [HttpPost("trip-request/approve/{tripJoinRequestId}")]
         public async Task<IActionResult> ApproveTripRequest(
             [FromRoute] int tripJoinRequestId, [FromBody] bool approve)
-            => Ok(await _mediator.Send(new ApproveTripJoinRequest
+        {
+            var userId = GetUserId();
+            return Ok(await _mediator.Send(new ApproveTripJoinRequest
+                {
+                    TripJoinRequestId = tripJoinRequestId,
+                    Approve = approve
+                }));
+        }
+
+        public int GetUserId()
+        {
+            try
             {
-                TripJoinRequestId = tripJoinRequestId,
-                Approve = approve
-            }));
+                var authHeader = HttpContext.Request.Headers["Authorization"][1];
+
+                if (string.IsNullOrEmpty(authHeader))
+                    throw new UnauthorizedException();
+
+                return _encryptor.DecryptData(authHeader);
+            }
+            catch
+            {
+                throw new UnauthorizedException();
+            }
+        }
     }
 }
