@@ -19,19 +19,21 @@ namespace CarPool.Trip.Application.Event.Queries
 
             public Handler(TripDbContext tripDb)
             {
+                // Fake for events
                 _tripDb = tripDb;
             }
 
             public async Task<IEnumerable<EventDto>> Handle(GetAllEvents request, CancellationToken cancellationToken)
-                => _tripDb.Events
-                        .Select(x => new EventDto
-                        {
-                            Id = x.Id,
-                            Description = x.Description,
-                            Address = x.Address,
-                            EventName = x.EventName,
-                            LogoUri = x.LogoUri
-                        });
+                 => _tripDb.Events.Select(x =>
+                 new EventDto
+                 {
+                     Id = x.Id,
+                     EventName = x.EventName,
+                     Description = x.Description,
+                     Address = x.Address,
+                     LogoUri = x.LogoUri
+                 });
+            
         }
     }
 }
