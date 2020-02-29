@@ -8,6 +8,7 @@ using CarPool.Trip.Application.Participant.Queries;
 using CarPool.Trip.Application.TripJoinRequest.Commands;
 using CarPool.Trip.Application.TripJoinRequest.Queries;
 using CarPool.Trip.Domain.Entities;
+using CarPool.Trip.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,11 +24,13 @@ namespace CarPool.Trip.Web
     {
         private readonly IMediator _mediator;
         private readonly IEncryptor _encryptor;
+        private readonly TripDbContext _dbContext;
 
-        public TripController(IMediator mediator, IEncryptor encryptor)
+        public TripController(IMediator mediator, IEncryptor encryptor, TripDbContext dbContext)
         {
             _mediator = mediator;
             _encryptor = encryptor;
+            _dbContext = dbContext;
         }
 
         [HttpGet("events")]
@@ -60,9 +63,9 @@ namespace CarPool.Trip.Web
         }
 
         [HttpGet("participant")]
-        [ProducesResponseType(typeof(IEnumerable<ParticipantDto>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetParticipants()
-            => Ok(await _mediator.Send(new GetParticipants()));
+        [ProducesResponseType(typeof(ParticipantDto), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetParticipant() =>
+            Ok(await _mediator.Send(new GetParticipant { UserId = GetUserId() }));
 
         [HttpPost("participant/login")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
