@@ -4,6 +4,7 @@ using CarPool.Trip.Application.Event.Queries;
 using CarPool.Trip.Application.EventTrip.Commands;
 using CarPool.Trip.Application.Exceptions;
 using CarPool.Trip.Application.Participant.Commands;
+using CarPool.Trip.Application.Participant.Queries;
 using CarPool.Trip.Application.TripJoinRequest.Commands;
 using CarPool.Trip.Application.TripJoinRequest.Queries;
 using CarPool.Trip.Domain.Entities;
@@ -57,6 +58,11 @@ namespace CarPool.Trip.Web
             participant.AuthToken = _encryptor.EncryptData(participant.Id);
             return Ok(participant);
         }
+
+        [HttpGet("participant")]
+        [ProducesResponseType(typeof(IEnumerable<ParticipantDetailedDto>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetParticipants()
+            => Ok(await _mediator.Send(new GetParticipants()));
 
         [HttpPost("participant/login")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
