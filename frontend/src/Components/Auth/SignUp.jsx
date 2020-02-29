@@ -14,6 +14,7 @@ import FacebookLogin from "react-facebook-login";
 import InputField from "../Other/InputField";
 import { register } from "../../services/axios";
 import AuthContainer from "./AuthContainer";
+import PATHS from "../Router/RouterPaths";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,9 +50,10 @@ const SignUp = () => {
       carModel
     );
 
-    if (data && data.token) {
+    if (data) {
       // success
-      setContext({ ...context, token: data.token });
+      console.log(data);
+      history.push(PATHS.login);
     } else {
       setError(true);
     }

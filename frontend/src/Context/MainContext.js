@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const initialState = {};
 
@@ -6,15 +6,21 @@ const MainContext = React.createContext();
 
 export const MainContextProvider = ({ children }) => {
   const [context, setContext] = React.useState({
-    token: "123",
+    token: localStorage.getItem("token"),
     user: {
-      name: "Jonas Motiejauskas",
+      name: "",
+      surname: "",
       phone: "",
       email: "",
-      car: {}
+      car: "",
+      carPlate: ""
     },
     events: []
   });
+
+  useEffect(() => {
+    localStorage.setItem("token", context.token);
+  }, [context.token]);
 
   return (
     <MainContext.Provider value={[context, setContext]}>
