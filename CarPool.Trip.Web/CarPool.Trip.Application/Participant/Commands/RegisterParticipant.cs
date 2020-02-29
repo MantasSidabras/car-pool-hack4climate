@@ -1,11 +1,12 @@
-﻿using CarPool.Trip.Persistence;
+﻿using CarPool.Trip.Application.Dto;
+using CarPool.Trip.Persistence;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CarPool.Trip.Application.Participant.Commands
 {
-    public class RegisterParticipant : IRequest<int>
+    public class RegisterParticipant : IRequest<ParticipantDto>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -14,7 +15,7 @@ namespace CarPool.Trip.Application.Participant.Commands
         public string Carplate { get; set; }
         public string CarModel { get; set; }
 
-        public class Handler : IRequestHandler<RegisterParticipant, int>
+        public class Handler : IRequestHandler<RegisterParticipant, ParticipantDto>
         {
             private readonly TripDbContext _dbContext;
 
@@ -23,7 +24,7 @@ namespace CarPool.Trip.Application.Participant.Commands
                 _dbContext = dbContext;
             }
 
-            public async Task<int> Handle(RegisterParticipant request, CancellationToken cancellationToken)
+            public async Task<ParticipantDto> Handle(RegisterParticipant request, CancellationToken cancellationToken)
             {
                 var participant = new Domain.Entities.Participant
                 {
@@ -39,7 +40,15 @@ namespace CarPool.Trip.Application.Participant.Commands
 
                 await _dbContext.SaveChangesAsync();
 
-                return participant.Id;
+                return new ParticipantDto
+                {
+                    Id = participant.Id,
+                    CarModel = participant.CarModel,
+                    Carplate = participant.Carplate,
+                    Name = participant.Name,
+                    Surname = participant.Surname,
+                    PhoneNumber = participant.PhoneNumber
+                };
             }
         }
     }
