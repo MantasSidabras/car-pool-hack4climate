@@ -26,7 +26,7 @@ namespace CarPool.Trip.Web
         }
 
         [HttpPost("trip/init")]
-        public int InitiateTrip(
+        public EventTrip InitiateTrip(
             [FromBody] int eventId, 
             [FromBody] decimal startLatitude, 
             [FromBody] decimal startLongtitude,
@@ -36,7 +36,7 @@ namespace CarPool.Trip.Web
         }
 
         [HttpPost("trip/join/{tripId}")]
-        public int JoinTrip(
+        public TripJoinRequest JoinTrip(
             [FromRoute] int tripId,
             [FromBody] decimal passengerLatitude,
             [FromBody] decimal passengerLongtitude)
