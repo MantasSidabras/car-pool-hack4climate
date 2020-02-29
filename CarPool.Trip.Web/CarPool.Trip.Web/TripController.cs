@@ -1,9 +1,11 @@
 ﻿using CarPool.Trip.Application.Dto;
 using CarPool.Trip.Application.Event.Queries;
 using CarPool.Trip.Application.EventTrip.Commands;
+using CarPool.Trip.Application.Participant.Commands;
 using CarPool.Trip.Application.TripJoinRequest.Commands;
 using CarPool.Trip.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -38,6 +40,11 @@ namespace CarPool.Trip.Web
         {
             throw new NotImplementedException();
         }
+
+        [HttpPost("participant")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Register([FromRoute] RegisterParticipant request)
+            => Ok(await _mediator.Send(request));
 
         [HttpPost("trip/init")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
