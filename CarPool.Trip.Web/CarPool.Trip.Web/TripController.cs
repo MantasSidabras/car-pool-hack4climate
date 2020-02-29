@@ -67,7 +67,6 @@ namespace CarPool.Trip.Web
         {
             return Ok(await _mediator.Send(request));
         }
-            
 
         [HttpGet("trip/{id}")]
         [ProducesResponseType(typeof(EventTripDetails), (int)HttpStatusCode.OK)]
@@ -76,14 +75,18 @@ namespace CarPool.Trip.Web
 
         [HttpPost("trip/init")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> InitiateTrip(InitiateEventTrip request) =>
-            Ok(await _mediator.Send(request));
+        public async Task<IActionResult> InitiateTrip(InitiateEventTrip request)
+        {
+            request.DriverId = GetUserId();
+            return Ok(await _mediator.Send(request));
+        }
 
         [HttpPost("trip/join")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<IActionResult> JoinTrip(RequestToJoinTrip request)
         {
             var userId = GetUserId();
+            request.PassengerId = userId;
             return Ok(await _mediator.Send(request));
         }
 
@@ -95,7 +98,8 @@ namespace CarPool.Trip.Web
             return Ok(await _mediator.Send(new ApproveTripJoinRequest
                 {
                     TripJoinRequestId = tripJoinRequestId,
-                    Approve = approve
+                    Approve = approve,
+                    ApproverId = userId
                 }));
         }
 
