@@ -19,14 +19,35 @@ namespace CarPool.Trip.Web
             throw new NotImplementedException();
         }
 
-        [HttpGet("trips")]
-        public EventTrip[] Trips()
+        [HttpGet("event/trips/{eventId}")]
+        public EventTrip[] EventTrips([FromRoute] int eventId)
         {
             throw new NotImplementedException();
         }
 
-        [HttpGet("trip/init")]
-        public IActionResult InitiateTrip()
+        [HttpPost("trip/init")]
+        public EventTrip InitiateTrip(
+            [FromBody] int eventId, 
+            [FromBody] decimal startLatitude, 
+            [FromBody] decimal startLongtitude,
+            [FromBody] DateTime tripStartTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost("trip/join/{tripId}")]
+        public TripJoinRequest JoinTrip(
+            [FromRoute] int tripId,
+            [FromBody] decimal passengerLatitude,
+            [FromBody] decimal passengerLongtitude)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost("trip-request/approve/{tripJoinRequestId}")]
+        public IActionResult ApproveTripRequest(
+            [FromRoute] int tripJoinRequestId,
+            [FromBody] bool approve)
         {
             throw new NotImplementedException();
         }
