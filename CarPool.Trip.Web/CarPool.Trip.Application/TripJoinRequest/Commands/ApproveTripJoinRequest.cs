@@ -34,7 +34,7 @@ namespace CarPool.Trip.Application.TripJoinRequest.Commands
 
                 await _dbContext.SaveChangesAsync();
 
-                return Unit.Value
+                return Unit.Value;
             }
         }
     }
