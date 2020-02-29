@@ -6,24 +6,24 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import Login from '../MainSection/Login/Login';
+import Login from '../Login/Login';
+import MainSection from '../MainSection/MainSection';
+import PATHS from './RouterPaths';
 
 const MainRouter = () => {
     return (
-        <Router>
 
-            <Switch>
-                {/* <Route path="/main">
+        <Switch>
+            {/* <Route path="/main">
                 <About />
             </Route> */}
-                {/* <Route path="/login">
-                <login />
-            </Route> */}
-                <Route path="/">
-                    <Login />
-                </Route>
-            </Switch>
-        </Router>
+            <Route path={PATHS.login}>
+                <Login />
+            </Route>
+            <Route path={PATHS.home}>
+                <MainSection />
+            </Route>
+        </Switch>
     )
 }
 
