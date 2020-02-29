@@ -1,4 +1,5 @@
-﻿using CarPool.Trip.Domain.Entities;
+﻿using CarPool.Trip.Application.Encryption;
+using CarPool.Trip.Domain.Entities;
 using CarPool.Trip.Persistence;
 using CarPool.Trip.Web.Filters;
 using Microsoft.AspNetCore.Builder;
@@ -24,6 +25,9 @@ namespace CarPool.Trip.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var encryptor = new Encryptor("GkpGkdiaFQhFzvHKRAyrEqSH6sHkHeG3ypaSLMTkVFMhZzV0b4qHCdCp");
+            services.AddSingleton<IEncryptor>(encryptor);
+
             services.AddControllers(options =>
             {
                 options.Filters.Add(typeof(ExceptionToResponseMappingFilter));
