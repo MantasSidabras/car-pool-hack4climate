@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Box, makeStyles, Typography, Button } from "@material-ui/core";
 import { useLocation, useParams } from "react-router-dom";
 import MainContext from "../../../../Context/MainContext";
-import { getEvents, getEventById } from "../../../../services/axios";
+import { getEventById } from "../../../../services/axios";
 import TripList from "../../Trip/TripsList/TripList";
 import RoomIcon from "@material-ui/icons/Room";
 

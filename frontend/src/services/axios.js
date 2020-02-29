@@ -35,9 +35,11 @@ export const getEventById = async (id, token) => {
   }
 };
 
-export const getTripById = async id => {
+export const getTripById = async (id, token) => {
   try {
-    const { data } = await backendHttpClient.get(`/trip/${id}`);
+    const { data } = await backendHttpClient.get(`/trip/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return { data };
   } catch (error) {
     console.error(error);
