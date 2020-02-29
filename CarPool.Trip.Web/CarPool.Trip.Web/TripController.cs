@@ -55,6 +55,11 @@ namespace CarPool.Trip.Web
         public async Task<IActionResult> Login(LoginParticipant request)
             => Ok(await _mediator.Send(request));
 
+        [HttpGet("trip/{id}")]
+        [ProducesResponseType(typeof(EventTripDetails), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> TripDetails(int id) =>
+            Ok(await _mediator.Send(new GetTripDetails { Id = id }));
+
         [HttpPost("trip/init")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> InitiateTrip(InitiateEventTrip request) =>
