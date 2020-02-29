@@ -7,11 +7,11 @@ import SignUp from "../Auth/SignUp";
 import EventDetails from "../MainSection/Event/EventDetails/EventDetails";
 import MainSection from "../MainSection/MainSection";
 import PATHS from "./RouterPaths";
+import TripDetails from "../MainSection/Trip/TripDetails/TripDetails";
 
 const MainRouter = () => {
   const [context, setContext] = React.useContext(MainContext);
   const loggedIn = !!context.token;
-  console.log(context.token);
   return (
     <Switch>
       <Route path={PATHS.login}>
@@ -19,6 +19,9 @@ const MainRouter = () => {
       </Route>
       <Route path={PATHS.signup}>
         {loggedIn ? <Redirect to={PATHS.home} /> : <SignUp />}
+      </Route>
+      <Route path={PATHS.trip}>
+        {loggedIn ? <TripDetails /> : <Redirect to={PATHS.login} />}
       </Route>
       <Route path={PATHS.event}>
         {loggedIn ? <EventDetails /> : <Redirect to={PATHS.home} />}

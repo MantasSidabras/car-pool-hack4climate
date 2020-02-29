@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Box, makeStyles, Typography } from "@material-ui/core";
+import { Grid, Box, makeStyles, Typography, Button } from "@material-ui/core";
 import { useLocation, useParams } from "react-router-dom";
 import MainContext from "../../../../Context/MainContext";
 import { getEvents, getEventById } from "../../../../services/axios";
@@ -54,13 +54,18 @@ const EventDetails = () => {
             <Box component="img" src={data.logoUri} className={classes.image} />
             <Grid container direction="row" justify="flex-start">
               <Box component="div" m={2} className={classes.content}>
-                <Grid container spacing={2}>
+                <Grid container justify="space-between" spacing={2}>
                   <Grid item style={{ textAlign: "left" }}>
                     {data.description}
                   </Grid>
                   <Grid item style={{ textAlign: "left", fontWeight: "Bold" }}>
                     <RoomIcon />
                     {data.address}
+                  </Grid>
+                  <Grid item>
+                    <Button variant="contained" color="primary">
+                      Create a trip
+                    </Button>
                   </Grid>
                 </Grid>
               </Box>

@@ -13,7 +13,7 @@ export const backendHttpClient = axios.create({
 
 export const getEvents = async () => {
   try {
-    const { data } = await backendHttpClient.get("/events");
+    const { data } = await backendHttpClient.get("/events",);
     return { data };
   } catch (error) {
     console.error(error);
@@ -24,6 +24,16 @@ export const getEvents = async () => {
 export const getEventById = async id => {
   try {
     const { data } = await backendHttpClient.get(`/event/${id}`);
+    return { data };
+  } catch (error) {
+    console.error(error);
+    return { error };
+  }
+};
+
+export const getTripById = async id => {
+  try {
+    const { data } = await backendHttpClient.get(`/trip/${id}`);
     return { data };
   } catch (error) {
     console.error(error);
