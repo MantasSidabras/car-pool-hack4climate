@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CarPool.Trip.Domain.Entities
 {
@@ -12,5 +13,7 @@ namespace CarPool.Trip.Domain.Entities
         public decimal TripStartLongitude { get; set; }
         public Event Event { get; set; }
         public Participant Driver { get; set; }
+
+        public ICollection<TripJoinRequest> TripJoinRequests { get; set; }
     }
 }

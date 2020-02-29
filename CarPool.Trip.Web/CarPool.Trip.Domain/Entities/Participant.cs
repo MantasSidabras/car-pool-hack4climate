@@ -10,5 +10,6 @@ namespace CarPool.Trip.Domain.Entities
         public string Carplate { get; set; }
 
         public ICollection<EventTrip> DrivingAt { get; set; }
+        public ICollection<TripJoinRequest> TripJoinRequests { get; set; }
     }
 }

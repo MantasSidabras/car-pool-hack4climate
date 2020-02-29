@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CarPool.Trip.Persistence
 {
-    public class TripDbContext
+    public class TripDbContext : DbContext
     {
+        protected TripDbContext()
+        {
+        }
     }
 }
