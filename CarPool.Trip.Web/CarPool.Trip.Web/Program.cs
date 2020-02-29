@@ -1,4 +1,6 @@
+using CarPool.Trip.Persistence;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace CarPool.Trip.Web
@@ -15,6 +17,10 @@ namespace CarPool.Trip.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureServices(options =>
+                {
+                    options.AddDbContext<TripDbContext>();
                 });
     }
 }
