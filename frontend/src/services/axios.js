@@ -31,6 +31,16 @@ export const getEventById = async id => {
   }
 };
 
+export const getTripById = async id => {
+  try {
+    const { data } = await backendHttpClient.get(`/trip/${id}`);
+    return { data };
+  } catch (error) {
+    console.error(error);
+    return { error };
+  }
+};
+
 export const register = async (
   name,
   surname,

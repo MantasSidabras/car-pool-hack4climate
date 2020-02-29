@@ -11,17 +11,22 @@ import {
 } from "@material-ui/core";
 import InboxIcon from "@material-ui/icons/Inbox";
 import TripItem from "../TripItem/TripItem";
+import { useHistory } from "react-router-dom";
+import PATHS from "../../../Router/RouterPaths";
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    // maxWidth: 360,
     backgroundColor: theme.palette.background.paper
   }
 }));
 
 const TripList = ({ trips }) => {
   const classes = useStyles();
+  const history = useHistory();
+  const onTripSelect = tripId => {
+    history.push(PATHS.trip.replace(":tripId", tripId));
+  };
 
   return (
     <Box m={2}>
@@ -30,12 +35,16 @@ const TripList = ({ trips }) => {
         <div className={classes.root}>
           <List component="nav" aria-label="main mailbox folders">
             {trips.map(trip => {
-              // TODO change to id
-              return <TripItem key={trip.address} trip={trip} />;
+              return (
+                <TripItem
+                  key={trip.id}
+                  trip={trip}
+                  onTripSelect={onTripSelect}
+                />
+              );
             })}
           </List>
         </div>
-        {JSON.stringify(trips)}
       </Grid>
     </Box>
   );

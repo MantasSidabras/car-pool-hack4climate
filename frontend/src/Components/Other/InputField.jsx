@@ -1,19 +1,15 @@
 import { Input, InputLabel } from "@material-ui/core";
 import * as React from "react";
 
-const InputField = ({ label, placeholder, width, onChange, type }) => {
+const InputField = ({ label, width, ...props }) => {
   return (
     <div style={{ width: width || "70%" }}>
-      <InputLabel style={{ color: "black", textAlign: "left" }}>
+      <InputLabel
+        style={{ color: "black", textAlign: "left", fontSize: "12px" }}
+      >
         {label}
       </InputLabel>
-      <Input
-        onChange={onChange}
-        name="Username"
-        placeholder={placeholder}
-        style={{ marginBottom: 20, width: "100%" }}
-        type={type}
-      />
+      <Input style={{ marginBottom: 20, width: "100%" }} {...props} />
     </div>
   );
 };
