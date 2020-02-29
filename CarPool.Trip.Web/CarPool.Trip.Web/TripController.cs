@@ -59,14 +59,4 @@ namespace CarPool.Trip.Web
                 Approve = approve
             }));
     }
-
-    public class InitTrip
-    {
-        public string Address { get; set; }
-        public DateTime Time { get; set; }
-        public string CarPlate { get; set; }
-        public string CarDescription { get; set; }
-        public string DriverPhoneNumber { get; set; }
-        public int Capacity { get; set; }
-    }
 }
