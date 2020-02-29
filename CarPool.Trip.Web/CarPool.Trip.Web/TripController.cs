@@ -62,7 +62,9 @@ namespace CarPool.Trip.Web
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public async Task<IActionResult> Login(LoginParticipant request)
         {
-            return Ok(await _mediator.Send(request));
+            var participant = await _mediator.Send(request);
+            participant.AuthToken = _encryptor.EncryptData(participant.Id);
+            return Ok(participant);
         }
 
         [HttpGet("trip/{id}")]

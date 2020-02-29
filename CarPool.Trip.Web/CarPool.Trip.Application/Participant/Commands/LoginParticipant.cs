@@ -38,11 +38,7 @@ namespace CarPool.Trip.Application.Participant.Commands
 
                 return new ParticipantDto
                 {
-                    AuthToken = Convert.ToBase64String(
-                        ProtectedData.Protect(
-                            Encoding.Unicode.GetBytes(participant.PhoneNumber),
-                            Encoding.Unicode.GetBytes(ApplicationSecret),
-                            DataProtectionScope.LocalMachine)),
+                    Id = participant.Id,
                     CarModel = participant.CarModel,
                     Carplate = participant.Carplate,
                     Name = participant.Name,
