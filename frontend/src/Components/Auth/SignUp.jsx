@@ -90,12 +90,6 @@ const SignUp = () => {
           type="password"
         />
         <InputField
-          label="Repeat password*"
-          placeholder="Enter password again"
-          type="password"
-        />
-
-        <InputField
           label="Car model"
           placeholder="Enter car model"
           onChange={e => setCarModel(e.target.value)}
