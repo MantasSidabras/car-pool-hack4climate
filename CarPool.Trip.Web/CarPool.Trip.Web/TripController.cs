@@ -26,7 +26,7 @@ namespace CarPool.Trip.Web
         public async Task<IActionResult> Events()
             => Ok(await _mediator.Send(new GetAllEvents()));
 
-        [HttpGet("event/trips/{eventId}")]
+        [HttpGet("event/{eventId}")]
         [ProducesResponseType(typeof(EventDetailedDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> EventTrips([FromRoute] int eventId)
