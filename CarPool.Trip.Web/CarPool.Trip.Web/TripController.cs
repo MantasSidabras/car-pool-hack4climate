@@ -42,9 +42,17 @@ namespace CarPool.Trip.Web
         public async Task<IActionResult> GetTripRequests([FromRoute] int tripId)
             => Ok(await _mediator.Send(new GetTripJoinRequestsByTrip { Id = tripId }));
 
-        [HttpPost("participant")]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        [HttpPost("participant/register")]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Register(RegisterParticipant request)
+            => Ok(await _mediator.Send(request));
+
+        [HttpPost("participant/login")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ParticipantDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        public async Task<IActionResult> Login(LoginParticipant request)
             => Ok(await _mediator.Send(request));
 
         [HttpPost("trip/init")]
