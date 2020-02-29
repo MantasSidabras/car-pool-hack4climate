@@ -40,7 +40,7 @@ export const register = async (
   carModel
 ) => {
   try {
-    const { data } = await backendHttpClient.post(`/register`, {
+    const { data } = await backendHttpClient.post(`/participant/register`, {
       name,
       surname,
       phoneNumber,
@@ -57,7 +57,7 @@ export const register = async (
 
 export const login = async (phoneNumber, password) => {
   try {
-    const { data } = await backendHttpClient.post(`/register`, {
+    const { data } = await backendHttpClient.post(`/participant/login`, {
       phoneNumber,
       password
     });
