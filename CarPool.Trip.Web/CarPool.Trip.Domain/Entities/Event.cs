@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CarPool.Trip.Domain.Entities
 {
@@ -9,6 +10,7 @@ namespace CarPool.Trip.Domain.Entities
         public string Description { get; set; }
         public string LogoUri { get; set; }
         public string Address { get; set; }
+        public DateTime EventTime { get; set; }
         public ICollection<EventTrip> EventTrips { get; set; }
     }
 }

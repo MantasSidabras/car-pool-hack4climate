@@ -31,7 +31,8 @@ namespace CarPool.Trip.Application.Event.Queries
                      EventName = x.EventName,
                      Description = x.Description,
                      Address = x.Address,
-                     LogoUri = x.LogoUri
+                     LogoUri = x.LogoUri,
+                     EventTime = x.EventTime
                  });
             
         }

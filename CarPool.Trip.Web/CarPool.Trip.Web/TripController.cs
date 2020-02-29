@@ -46,13 +46,10 @@ namespace CarPool.Trip.Web
             throw new NotImplementedException();
         }
 
-        [HttpPost("trip/join/{tripId}")]
-        public TripJoinRequest JoinTrip(
-            [FromRoute] int tripId,
-            [FromBody] JoinTrip req)
-        {
-            throw new NotImplementedException();
-        }
+        [HttpPost("trip/join")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> JoinTrip(RequestToJoinTrip request)
+            => Ok(await _mediator.Send(request));
 
         [HttpPost("trip-request/approve/{tripJoinRequestId}")]
         public async Task<IActionResult> ApproveTripRequest(
@@ -73,11 +70,5 @@ namespace CarPool.Trip.Web
         public string CarDescription { get; set; }
         public string DriverPhoneNumber { get; set; }
         public int Capacity { get; set; }
-    }
-
-    public class JoinTrip
-    {
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
     }
 }
