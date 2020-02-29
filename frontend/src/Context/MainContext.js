@@ -11,7 +11,6 @@ export const MainContextProvider = ({ children }) => {
       name: "",
       surname: "",
       phone: "",
-      email: "",
       car: "",
       carPlate: ""
     },

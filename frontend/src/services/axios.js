@@ -13,7 +13,7 @@ export const backendHttpClient = axios.create({
 
 export const getEvents = async () => {
   try {
-    const { data } = await backendHttpClient.get("/events");
+    const { data } = await backendHttpClient.get("/events",);
     return { data };
   } catch (error) {
     console.error(error);

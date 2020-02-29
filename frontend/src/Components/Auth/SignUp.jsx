@@ -50,10 +50,17 @@ const SignUp = () => {
       carModel
     );
 
-    if (data) {
-      // success
-      console.log(data);
-      history.push(PATHS.login);
+    if (data && data.authToken) {
+      const { name, surname, phoneNumber, carplate, carModel } = data;
+      setContext({
+        ...context,
+        token: data.authToken,
+        name,
+        surname,
+        phone: phoneNumber,
+        car: carModel,
+        carPlate: carplate
+      });
     } else {
       setError(true);
     }
