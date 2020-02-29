@@ -29,8 +29,17 @@ const Login = () => {
   const onLogin = async () => {
     const { data, error } = await login(username, pass);
 
-    if (data && data.token) {
-      setContext({ ...context, token: data.token });
+    if (data && data.authToken) {
+      const { name, surname, phoneNumber, carplate, carModel } = data;
+      setContext({
+        ...context,
+        token: data.authToken,
+        name,
+        surname,
+        phone: phoneNumber,
+        car: carModel,
+        carPlate: carplate
+      });
     } else {
       setError(true);
     }
