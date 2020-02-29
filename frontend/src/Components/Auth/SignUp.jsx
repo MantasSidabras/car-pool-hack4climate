@@ -55,11 +55,13 @@ const SignUp = () => {
       setContext({
         ...context,
         token: data.authToken,
-        name,
-        surname,
-        phone: phoneNumber,
-        car: carModel,
-        carPlate: carplate
+        user: {
+          name,
+          surname,
+          phone: phoneNumber,
+          car: carModel,
+          carPlate: carplate
+        }
       });
     } else {
       setError(true);

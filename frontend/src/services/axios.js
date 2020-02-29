@@ -11,9 +11,11 @@ export const backendHttpClient = axios.create({
   timeout: 10 * 1000
 });
 
-export const getEvents = async () => {
+export const getEvents = async token => {
   try {
-    const { data } = await backendHttpClient.get("/events",);
+    const { data } = await backendHttpClient.get("/events", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return { data };
   } catch (error) {
     console.error(error);
@@ -21,9 +23,11 @@ export const getEvents = async () => {
   }
 };
 
-export const getEventById = async id => {
+export const getEventById = async (id, token) => {
   try {
-    const { data } = await backendHttpClient.get(`/event/${id}`);
+    const { data } = await backendHttpClient.get(`/event/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return { data };
   } catch (error) {
     console.error(error);
@@ -31,9 +35,11 @@ export const getEventById = async id => {
   }
 };
 
-export const getTripById = async id => {
+export const getTripById = async (id, token) => {
   try {
-    const { data } = await backendHttpClient.get(`/trip/${id}`);
+    const { data } = await backendHttpClient.get(`/trip/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return { data };
   } catch (error) {
     console.error(error);
