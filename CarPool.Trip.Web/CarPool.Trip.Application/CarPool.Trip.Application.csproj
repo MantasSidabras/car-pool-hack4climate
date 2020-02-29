@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="EventTrip\Commands\" />
-    <Folder Include="EventTrip\Queries\" />
     <Folder Include="Event\Commands\" />
     <Folder Include="Participant\Commands\" />
     <Folder Include="Participant\Queries\" />

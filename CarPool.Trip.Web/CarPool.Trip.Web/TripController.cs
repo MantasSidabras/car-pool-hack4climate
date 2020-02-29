@@ -32,10 +32,10 @@ namespace CarPool.Trip.Web
             => Ok(await _mediator.Send(new GetAllEvents()));
 
         [HttpGet("event/trips/{eventId}")]
-        public EventTrip[] EventTrips([FromRoute] int eventId)
-        {
-            throw new NotImplementedException();
-        }
+        [ProducesResponseType(typeof(EventDetailedDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> EventTrips([FromRoute] int eventId)
+            => Ok(await _mediator.Send(new GetSingleEventDetails(eventId)));
 
         [HttpGet("trip-requests/{tripId}")]
         public TripJoinRequest GetTripRequests([FromRoute] int tripId)
