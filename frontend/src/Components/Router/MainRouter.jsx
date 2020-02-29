@@ -1,12 +1,14 @@
 import * as React from "react";
 
 import { Switch, Route, Redirect } from "react-router-dom";
-import Auth from "../Auth/Auth";
+import Auth from "../Auth/AuthContainer";
 import MainSection from "../MainSection/MainSection";
 import PATHS from "./RouterPaths";
 import EventDetails from "../MainSection/Event/EventDetails/EventDetails";
 import Logout from "../Auth/Logout";
 import MainContext from "../../Context/MainContext";
+import Login from "../Auth/Login";
+import SignUp from "../Auth/SignUp";
 
 const MainRouter = () => {
   const [context, setContext] = React.useContext(MainContext);
@@ -14,8 +16,11 @@ const MainRouter = () => {
 
   return (
     <Switch>
-      <Route path={PATHS.auth}>
-        {loggedIn ? <Redirect to={PATHS.home} /> : <Auth />}
+      <Route path={PATHS.login}>
+        {loggedIn ? <Redirect to={PATHS.home} /> : <Login />}
+      </Route>
+      <Route path={PATHS.signup}>
+        {loggedIn ? <Redirect to={PATHS.home} /> : <SignUp />}
       </Route>
       <Route path={PATHS.event}>
         {loggedIn ? <EventDetails /> : <Redirect to={PATHS.home} />}

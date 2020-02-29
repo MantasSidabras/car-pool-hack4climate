@@ -1,6 +1,7 @@
 const PATHS = {
   home: "/events",
-  auth: "/auth",
+  login: "/login",
+  signup: "/signup",
   event: "/events/:id",
   logout: "logout"
 };
