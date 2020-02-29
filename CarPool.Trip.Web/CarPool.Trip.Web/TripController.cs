@@ -53,10 +53,7 @@ namespace CarPool.Trip.Web
         [HttpPost("participant/register")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Register(RegisterParticipant request)
-        {
-            var entityId = await _mediator.Send(request);
-            return Ok(_encryptor.EncryptData(entityId));
-        }
+            => Ok(_encryptor.EncryptData(await _mediator.Send(request)));
 
         [HttpPost("participant/login")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
