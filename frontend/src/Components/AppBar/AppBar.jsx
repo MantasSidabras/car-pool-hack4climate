@@ -25,13 +25,15 @@ const AppBarComponent = () => {
   const classes = useStyles();
   const history = useHistory();
   const [context, setContext] = useContext(MainContext);
+
+  const isLoggedIn = !!context.token;
   const onLoginClick = () => {
     history.push(PATHS.login);
   };
 
   const onTitleClick = () => {
     history.push(PATHS.home);
-  };    
+  };
 
   return (
     <AppBar position="sticky" className={classes.root}>
@@ -46,12 +48,19 @@ const AppBarComponent = () => {
         >
           Cool car pool
         </Typography>
-        {!context.loggedIn ? (
-          <Button color="inherit" onClick={onLoginClick}>
-            Login
-          </Button>
+        {!isLoggedIn ? (
+          <>
+            <Button color="inherit" onClick={onLoginClick}>
+              Log In
+            </Button>
+            <Button color="inherit" onClick={() => history.push(PATHS.signup)}>
+              Sign Up
+            </Button>
+          </>
         ) : (
-          <div />
+          <Button color="inherit" onClick={onLoginClick}>
+            Log Out
+          </Button>
         )}
       </Toolbar>
     </AppBar>
