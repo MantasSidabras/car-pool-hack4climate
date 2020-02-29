@@ -6,7 +6,7 @@ const MainContext = React.createContext();
 
 export const MainContextProvider = ({ children }) => {
   const [context, setContext] = React.useState({
-    loggedIn: false,
+    token: "",
     user: {
       name: "Jonas Motiejauskas",
       phone: "",

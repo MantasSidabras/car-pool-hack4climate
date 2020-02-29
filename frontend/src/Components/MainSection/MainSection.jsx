@@ -11,7 +11,6 @@ import { getEvents } from "../../services/axios";
 const useStyles = makeStyles(theme => ({
   root: {
     width: "60%",
-    // height: "500px",
     backgroundColor: "white"
   }
 }));
