@@ -6,6 +6,7 @@ import { getEvents } from "../../services/axios";
 import PATHS from "../Router/RouterPaths";
 import EventList from "./Event/EventList/EventList";
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
