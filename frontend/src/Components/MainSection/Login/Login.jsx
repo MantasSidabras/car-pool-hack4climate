@@ -13,9 +13,12 @@ const Login = () => {
     const classes = useStyles();
 
     return (
-        <Box m={3}>
-            <Grid container direction="column" justify="center" className={classes.root}>
+        <Box m={3} >
+            <Grid container direction="column" justify='space-between' className={classes.root}>
                 {/* <h2>Login</h2> */}
+                <Button variant="contained">
+                    Sign in with facebook
+                </Button>
                 <Button variant="contained">
                     Sign in with facebook
                 </Button>
