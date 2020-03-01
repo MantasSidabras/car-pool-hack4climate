@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Box, makeStyles, Typography, Button } from "@material-ui/core";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useHistory } from "react-router-dom";
 import MainContext from "../../../../Context/MainContext";
 import { getEventById } from "../../../../services/axios";
 import TripList from "../../Trip/TripsList/TripList";
 import RoomIcon from "@material-ui/icons/Room";
+import PATHS from "../../../Router/RouterPaths";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 const EventDetails = () => {
   const classes = useStyles();
   const location = useLocation();
+  const history = useHistory();
   const { id } = useParams();
 
   // const [context] = useContext(MainContext);
@@ -44,6 +46,10 @@ const EventDetails = () => {
     fetchData();
   }, []);
 
+  const onCreateTrip = () => {
+    history.push(PATHS.trip.replace(":tripId", "newTrip"));
+  };
+
   return (
     <>
       {error && <h2>Error</h2>}
@@ -63,14 +69,18 @@ const EventDetails = () => {
                     {data.address}
                   </Grid>
                   <Grid item>
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={onCreateTrip}
+                    >
                       Create a trip
                     </Button>
                   </Grid>
                 </Grid>
               </Box>
             </Grid>
-            <TripList trips={data.eventTrips} />
+            {data.eventTrips.length > 0 && <TripList trips={data.eventTrips} />}
           </Box>
         </Grid>
       ) : (

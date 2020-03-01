@@ -1,18 +1,8 @@
+import { Box, Grid, List, makeStyles } from "@material-ui/core";
 import React from "react";
-import {
-  Box,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  makeStyles,
-  Typography
-} from "@material-ui/core";
-import InboxIcon from "@material-ui/icons/Inbox";
-import TripItem from "../TripItem/TripItem";
 import { useHistory } from "react-router-dom";
 import PATHS from "../../../Router/RouterPaths";
+import TripItem from "../TripItem/TripItem";
 
 const useStyles = makeStyles(theme => ({
   root: {

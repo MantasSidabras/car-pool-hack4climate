@@ -38,7 +38,6 @@ const AppBarComponent = () => {
   const onTitleClick = () => {
     history.push(PATHS.home);
   };
-
   return (
     <AppBar position="sticky" className={classes.root}>
       <Toolbar variant="dense">
@@ -56,9 +55,14 @@ const AppBarComponent = () => {
             </Button>
           </>
         ) : (
-          <Button color="inherit" onClick={() => history.push(PATHS.logout)}>
-            Log Out
-          </Button>
+          <>
+            <Box
+              style={{ marginRight: "20px" }}
+            >{`${context.user.name} ${context.user.surname}`}</Box>
+            <Button color="inherit" onClick={() => history.push(PATHS.logout)}>
+              Log Out
+            </Button>
+          </>
         )}
       </Toolbar>
     </AppBar>
