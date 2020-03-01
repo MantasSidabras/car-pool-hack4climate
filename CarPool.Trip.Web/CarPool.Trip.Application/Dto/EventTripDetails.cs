@@ -8,6 +8,7 @@ namespace CarPool.Trip.Application.Dto
         public string EventName { get; set; }
         public string EventAddress { get; set; }
         public string DepartureAddress { get; set; }
+        public int Capacity { get; set; }
         public DateTime DepartureTime { get; set; }
         public DriverDto Driver { get; set; }
         public IEnumerable<TripJoinRequestDto> TripJoinRequests { get; set; }

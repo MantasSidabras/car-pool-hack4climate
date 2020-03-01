@@ -1,5 +1,6 @@
 ﻿using CarPool.Trip.Application.Dto;
 using CarPool.Trip.Application.Encryption;
+using CarPool.Trip.Application.Event.Commands;
 using CarPool.Trip.Application.Event.Queries;
 using CarPool.Trip.Application.EventTrip.Commands;
 using CarPool.Trip.Application.Exceptions;
@@ -39,7 +40,12 @@ namespace CarPool.Trip.Web
         {
             return Ok(await _mediator.Send(new GetAllEvents()));
         }
-            
+
+        [HttpPost("event")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> AddEvent(AddEvent addEventCommand) =>
+            Ok(await _mediator.Send(addEventCommand));
+        
 
         [HttpGet("event/{eventId}")]
         [ProducesResponseType(typeof(EventDetailedDto), (int)HttpStatusCode.OK)]

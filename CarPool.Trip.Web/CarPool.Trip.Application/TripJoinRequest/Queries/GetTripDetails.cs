@@ -71,6 +71,7 @@ namespace CarPool.Trip.Application.TripJoinRequest.Queries
                     DepartureAddress = trip.Address,
                     EventAddress = trip.Event.Address,
                     DepartureTime = trip.TripStartTime,
+                    Capacity = trip.Capacity,
                     Driver = driver,
                     EventName = trip.Event.EventName,
                     TripJoinRequests = tripJoinRequests
