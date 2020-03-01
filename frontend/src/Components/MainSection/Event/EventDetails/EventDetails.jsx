@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Grid, Box, makeStyles, Typography, Button } from "@material-ui/core";
-import { useLocation, useParams, useHistory } from "react-router-dom";
-import MainContext from "../../../../Context/MainContext";
-import { getEventById } from "../../../../services/axios";
-import TripList from "../../Trip/TripsList/TripList";
+import { Box, Button, Grid, makeStyles } from "@material-ui/core";
 import RoomIcon from "@material-ui/icons/Room";
+import React, { useEffect, useState } from "react";
+import { useHistory, useLocation, useParams } from "react-router-dom";
+import { getEventById } from "../../../../services/axios";
 import PATHS from "../../../Router/RouterPaths";
+import TripList from "../../Trip/TripsList/TripList";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,8 +26,6 @@ const EventDetails = () => {
   const history = useHistory();
   const { id } = useParams();
 
-  // const [context] = useContext(MainContext);
-
   const [data, setData] = useState();
   const [error, setError] = useState();
 
@@ -47,7 +44,12 @@ const EventDetails = () => {
   }, []);
 
   const onCreateTrip = () => {
-    history.push(PATHS.trip.replace(":tripId", "newTrip"));
+    history.push(
+      PATHS.trip
+        .replace(":tripId", "newTrip")
+        .replace(":id", id)
+        .concat(`?eventName=${data.eventName}`)
+    );
   };
 
   return (
@@ -80,7 +82,9 @@ const EventDetails = () => {
                 </Grid>
               </Box>
             </Grid>
-            {data.eventTrips.length > 0 && <TripList trips={data.eventTrips} />}
+            {data.eventTrips.length > 0 && (
+              <TripList trips={data.eventTrips} eventId={id} />
+            )}
           </Box>
         </Grid>
       ) : (

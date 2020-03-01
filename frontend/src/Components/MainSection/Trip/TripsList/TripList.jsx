@@ -11,11 +11,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TripList = ({ trips }) => {
+const TripList = ({ trips, eventId }) => {
   const classes = useStyles();
   const history = useHistory();
   const onTripSelect = tripId => {
-    history.push(PATHS.trip.replace(":tripId", tripId));
+    history.push(PATHS.trip.replace(":tripId", tripId).replace(":id", eventId));
   };
 
   return (

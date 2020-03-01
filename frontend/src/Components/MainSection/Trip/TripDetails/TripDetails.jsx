@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Grid, Box, makeStyles, Button, ListItemIcon } from "@material-ui/core";
 import { getTripById } from "../../../../services/axios";
 import InputField from "../../../Other/InputField";
@@ -22,11 +22,10 @@ const useStyles = makeStyles(theme => ({
 
 const TripDetails = () => {
   const classes = useStyles();
-
+  const location = useLocation();
   const [trip, setTrip] = useState();
   const [error, setError] = useState();
   const { tripId } = useParams();
-
   const isNewTrip = tripId === "newTrip";
 
   React.useEffect(() => {
@@ -52,19 +51,19 @@ const TripDetails = () => {
       fetchData();
     } else {
       setTrip({
-        eventName: "",
+        eventName: new URLSearchParams(location.search).get("eventName") || "",
         departureAddress: "",
         departureTime: "",
+        capacity: 0,
         driver: {
           carModel: "",
           carplate: "",
           phoneNumber: ""
-        }
+        },
+        tripJoinRequests: []
       });
     }
   }, []);
-
-  console.log(trip);
 
   return (
     <>
@@ -139,11 +138,17 @@ const TripDetails = () => {
                     } / ${trip.capacity}`}</Box>
                   </ListItemIcon>
 
-                  {isNewTrip && (
-                    <Button variant="contained" color="primary" fullWidth>
-                      Submit
-                    </Button>
-                  )}
+                  <div style={{ marginTop: "15px" }}>
+                    {isNewTrip ? (
+                      <Button variant="contained" color="primary" fullWidth>
+                        Submit
+                      </Button>
+                    ) : (
+                      <Button variant="contained" color="primary" fullWidth>
+                        Request a seat
+                      </Button>
+                    )}
+                  </div>
                 </Box>
               </Grid>
             </Grid>

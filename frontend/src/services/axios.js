@@ -91,7 +91,6 @@ export const getUserData = async token => {
     });
     return { data };
   } catch (error) {
-    console.error(error);
     return { error };
   }
 };
