@@ -16,8 +16,8 @@ import { MainContextProvider } from "./Context/MainContext";
 
 const theme = createMuiTheme({
   palette: {
-    primary: lightBlue,
-    secondary: yellow
+    primary: lightBlue
+    // secondary: yellow
   }
 });
 

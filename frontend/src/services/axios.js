@@ -94,3 +94,63 @@ export const getUserData = async token => {
     return { error };
   }
 };
+
+export const createTrip = async (
+  token,
+  eventId,
+  fromAddress,
+  departureTime,
+  capacity
+) => {
+  try {
+    const { data } = await backendHttpClient.post(
+      `/trip/init`,
+      {
+        eventId: Number(eventId),
+        // driverId: 3,
+        fromAddress,
+        departureTime,
+        capacity: Number(capacity)
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    );
+    return { data };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export const joinTrip = async (token, tripId) => {
+  try {
+    const { data } = await backendHttpClient.post(
+      `/trip/join`,
+      {
+        tripId: Number(tripId),
+        pickUpAddress: "Gabijos 43"
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    );
+    return { data };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export const approveTrip = async (token, tripJoinRequestId, accept) => {
+  try {
+    const { data } = await backendHttpClient.post(
+      `/trip-request/approve/${tripJoinRequestId}`,
+      accept,
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    );
+    return { data };
+  } catch (error) {
+    return { error };
+  }
+};

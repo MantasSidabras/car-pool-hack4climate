@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useLocation, useHistory } from "react-router-dom";
 import { Grid, Box, makeStyles, Button, ListItemIcon } from "@material-ui/core";
-import { getTripById } from "../../../../services/axios";
+import { getTripById, createTrip, joinTrip } from "../../../../services/axios";
 import InputField from "../../../Other/InputField";
 import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
+import MainContext from "../../../../Context/MainContext";
+import TripRequestItem from "./TripRequestItem";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,11 +25,12 @@ const useStyles = makeStyles(theme => ({
 const TripDetails = () => {
   const classes = useStyles();
   const location = useLocation();
+  const history = useHistory();
   const [trip, setTrip] = useState();
   const [error, setError] = useState();
-  const { tripId } = useParams();
+  const { id, tripId } = useParams();
   const isNewTrip = tripId === "newTrip";
-
+  const [context, setContext] = useContext(MainContext);
   React.useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await getTripById(tripId);
@@ -64,6 +67,32 @@ const TripDetails = () => {
       });
     }
   }, []);
+
+  const onSubmit = async () => {
+    const { data } = await createTrip(
+      context.token,
+      id,
+      trip.departureAddress,
+      trip.departureTime,
+      trip.capacity
+    );
+    if (data) {
+      history.push(`/events/${id}/tripRedirect/${data}`);
+    }
+  };
+
+  const onJoin = async () => {
+    const { data } = await joinTrip(context.token, tripId);
+    if (data) {
+      console.log(data);
+      history.push(`/events/${id}/tripRedirect/${tripId}`);
+    }
+  };
+
+  const refresh = () => {
+    console.log("refresh");
+    history.push(`/events/${id}/tripRedirect/${tripId}`);
+  };
 
   return (
     <>
@@ -131,22 +160,65 @@ const TripDetails = () => {
                     }
                     readOnly={!isNewTrip}
                   />
-                  <ListItemIcon>
-                    <DirectionsCarIcon />
-                    <Box style={{ textAlign: "left", width: "100%" }}>{`${
-                      trip.tripJoinRequests.filter(t => t.approved).length
-                    } / ${trip.capacity}`}</Box>
-                  </ListItemIcon>
-
+                  {isNewTrip ? (
+                    <InputField
+                      label="Capacity"
+                      width="100%"
+                      value={trip.capacity}
+                      onChange={e =>
+                        setTrip({
+                          ...trip,
+                          capacity: e.target.value
+                        })
+                      }
+                      readOnly={!isNewTrip}
+                    />
+                  ) : (
+                    <ListItemIcon>
+                      <DirectionsCarIcon />
+                      <Box style={{ textAlign: "left", width: "100%" }}>{`${
+                        trip.tripJoinRequests.filter(t => t.approved).length
+                      } / ${trip.capacity}`}</Box>
+                    </ListItemIcon>
+                  )}
                   <div style={{ marginTop: "15px" }}>
                     {isNewTrip ? (
-                      <Button variant="contained" color="primary" fullWidth>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={onSubmit}
+                      >
                         Submit
                       </Button>
                     ) : (
-                      <Button variant="contained" color="primary" fullWidth>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={onJoin}
+                      >
                         Request a seat
                       </Button>
+                    )}
+                    {!isNewTrip && (
+                      <div
+                        style={{
+                          marginTop: "20px",
+                          display: "flex",
+                          flexDirection: "column"
+                        }}
+                      >
+                        {trip.tripJoinRequests.map(data => {
+                          return (
+                            <TripRequestItem
+                              data={data}
+                              token={context.token}
+                              refresh={refresh}
+                            />
+                          );
+                        })}
+                      </div>
                     )}
                   </div>
                 </Box>

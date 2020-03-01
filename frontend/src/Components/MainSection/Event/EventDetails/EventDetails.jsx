@@ -52,6 +52,8 @@ const EventDetails = () => {
     );
   };
 
+  console.log(data);
+
   return (
     <>
       {error && <h2>Error</h2>}

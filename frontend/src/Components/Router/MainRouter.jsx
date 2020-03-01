@@ -8,6 +8,7 @@ import EventDetails from "../MainSection/Event/EventDetails/EventDetails";
 import MainSection from "../MainSection/MainSection";
 import PATHS from "./RouterPaths";
 import TripDetails from "../MainSection/Trip/TripDetails/TripDetails";
+import TripRedirect from "../MainSection/Trip/TripDetails/TripRedirect";
 
 const MainRouter = () => {
   const [context, setContext] = React.useContext(MainContext);
@@ -19,6 +20,9 @@ const MainRouter = () => {
       </Route>
       <Route path={PATHS.signup}>
         {loggedIn ? <Redirect to={PATHS.home} /> : <SignUp />}
+      </Route>
+      <Route path={PATHS.tripRedirect}>
+        {loggedIn ? <TripRedirect /> : <Redirect to={PATHS.login} />}
       </Route>
       <Route path={PATHS.trip}>
         {loggedIn ? <TripDetails /> : <Redirect to={PATHS.login} />}
