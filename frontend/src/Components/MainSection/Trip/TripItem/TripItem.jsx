@@ -27,14 +27,14 @@ const TripItem = ({ trip, onTripSelect }) => {
             >
               <Grid container>
                 <ListItemIcon>
-                  <HouseIcon color="colorSecondary" />
+                  <HouseIcon />
                 </ListItemIcon>
                 <Typography>{trip.address}</Typography>
               </Grid>
             </Grid>
             <Grid container>
               <ListItemIcon>
-                <ScheduleIcon color="colorSecondary" />
+                <ScheduleIcon />
               </ListItemIcon>
               <Typography color="textSecondary">
                 {new Date(trip.departureTime).toLocaleTimeString()}

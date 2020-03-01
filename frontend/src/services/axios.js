@@ -83,3 +83,15 @@ export const login = async (phoneNumber, password) => {
     return { error };
   }
 };
+
+export const getUserData = async token => {
+  try {
+    const { data } = await backendHttpClient.get(`/participant`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return { data };
+  } catch (error) {
+    console.error(error);
+    return { error };
+  }
+};

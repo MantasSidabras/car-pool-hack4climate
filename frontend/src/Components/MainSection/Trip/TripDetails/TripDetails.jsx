@@ -133,7 +133,7 @@ const TripDetails = () => {
                     readOnly={!isNewTrip}
                   />
                   <ListItemIcon>
-                    <DirectionsCarIcon color="colorSecondary" />
+                    <DirectionsCarIcon />
                     <Box style={{ textAlign: "left", width: "100%" }}>{`${
                       trip.tripJoinRequests.filter(t => t.approved).length
                     } / ${trip.capacity}`}</Box>

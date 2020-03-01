@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { getUserData } from "../services/axios";
 
 const initialState = {};
 
@@ -14,12 +15,33 @@ export const MainContextProvider = ({ children }) => {
       car: "",
       carPlate: ""
     },
+    userDataFetched: false,
     events: []
   });
 
   useEffect(() => {
+    const fetchUserDetails = async () => {
+      const {
+        data: { name, surname, ...rest }
+      } = await getUserData(context.token);
+      setContext({
+        ...context,
+        user: {
+          name: name || "",
+          surname: surname || "",
+          phone: rest.phoneNumber,
+          carPlate: rest.carplate,
+          car: rest.carModel
+        },
+        userDataFetched: true
+      });
+    };
+
     localStorage.setItem("token", context.token);
-  }, [context.token]);
+    if (context.token && !context.userDataFetched) {
+      fetchUserDetails();
+    }
+  }, [context]);
 
   return (
     <MainContext.Provider value={[context, setContext]}>
