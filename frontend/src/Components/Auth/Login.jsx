@@ -30,7 +30,7 @@ const Login = () => {
     const { data, error } = await login(username, pass);
 
     if (data && data.authToken) {
-      const { name, surname, phoneNumber, carplate, carModel } = data;
+      const { name, surname, phoneNumber, carplate, carModel, id } = data;
       setContext({
         ...context,
         token: data.authToken,
@@ -39,7 +39,8 @@ const Login = () => {
           surname,
           phone: phoneNumber,
           car: carModel,
-          carPlate: carplate
+          carPlate: carplate,
+          id
         }
       });
     } else {

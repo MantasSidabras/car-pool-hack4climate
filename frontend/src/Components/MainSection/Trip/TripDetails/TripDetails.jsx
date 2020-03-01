@@ -59,6 +59,7 @@ const TripDetails = () => {
         departureTime: "",
         capacity: 0,
         driver: {
+          id: context.id,
           carModel: "",
           carplate: "",
           phoneNumber: ""
@@ -192,14 +193,16 @@ const TripDetails = () => {
                         Submit
                       </Button>
                     ) : (
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        onClick={onJoin}
-                      >
-                        Request a seat
-                      </Button>
+                      context.user.id !== trip.driver.id && (
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          fullWidth
+                          onClick={onJoin}
+                        >
+                          Request a seat
+                        </Button>
+                      )
                     )}
                     {!isNewTrip && (
                       <div

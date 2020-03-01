@@ -13,7 +13,8 @@ export const MainContextProvider = ({ children }) => {
       surname: "",
       phone: "",
       car: "",
-      carPlate: ""
+      carPlate: "",
+      id: undefined
     },
     userDataFetched: false,
     events: []
@@ -21,20 +22,23 @@ export const MainContextProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      const {
-        data: { name, surname, ...rest }
-      } = await getUserData(context.token);
-      setContext({
-        ...context,
-        user: {
-          name: name || "",
-          surname: surname || "",
-          phone: rest.phoneNumber,
-          carPlate: rest.carplate,
-          car: rest.carModel
-        },
-        userDataFetched: true
-      });
+      const { data } = await getUserData(context.token);
+      if (data) {
+        const { name, surname, ...rest } = data;
+
+        setContext({
+          ...context,
+          user: {
+            name: name || "",
+            surname: surname || "",
+            phone: rest.phoneNumber,
+            carPlate: rest.carplate,
+            car: rest.carModel,
+            id: rest.id
+          },
+          userDataFetched: true
+        });
+      }
     };
 
     localStorage.setItem("token", context.token);

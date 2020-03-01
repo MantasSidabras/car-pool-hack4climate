@@ -51,7 +51,7 @@ const SignUp = () => {
     );
 
     if (data && data.authToken) {
-      const { name, surname, phoneNumber, carplate, carModel } = data;
+      const { name, surname, phoneNumber, carplate, carModel, id } = data;
       setContext({
         ...context,
         token: data.authToken,
@@ -60,7 +60,8 @@ const SignUp = () => {
           surname,
           phone: phoneNumber,
           car: carModel,
-          carPlate: carplate
+          carPlate: carplate,
+          id
         }
       });
     } else {

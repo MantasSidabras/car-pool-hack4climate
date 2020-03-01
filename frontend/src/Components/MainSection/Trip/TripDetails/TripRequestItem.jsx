@@ -8,7 +8,6 @@ const TripRequestItem = ({
   token,
   refresh
 }) => {
-  console.log(rest);
   const acceptTrip = async () => {
     const { data } = await approveTrip(token, id, true);
     refresh();
@@ -20,7 +19,7 @@ const TripRequestItem = ({
   };
 
   return (
-    <Box p={2} boxShadow={3} stype={{ display: "flex" }}>
+    <Box p={2} boxShadow={3} style={{ marginBottom: "10px" }}>
       <div>{`${passenger.name} ${passenger.surname} (${passenger.phoneNumber})`}</div>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         {approved === null ? (
