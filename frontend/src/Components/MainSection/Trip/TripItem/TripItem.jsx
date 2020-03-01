@@ -32,19 +32,27 @@ const TripItem = ({ trip, onTripSelect }) => {
                 <Typography>{trip.address}</Typography>
               </Grid>
             </Grid>
-            <Grid container>
-              <ListItemIcon>
-                <ScheduleIcon />
-              </ListItemIcon>
-              <Typography color="textSecondary">
-                {new Date(trip.departureTime).toLocaleTimeString()}
-              </Typography>
-            </Grid>
           </Grid>
         </Grid>
-        <Typography color="textSecondary" variant="h6">
-          {trip.carModel}
-        </Typography>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between"
+          }}
+        >
+          <Typography color="textSecondary" variant="h6">
+            {trip.carModel}
+          </Typography>
+          <div style={{ display: "flex" }}>
+            <ListItemIcon>
+              <ScheduleIcon />
+            </ListItemIcon>
+            <Typography color="textSecondary">
+              {new Date(trip.departureTime).toLocaleTimeString()}
+            </Typography>
+          </div>
+        </div>
       </Grid>
     </ListItem>
   );
